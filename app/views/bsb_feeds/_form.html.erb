@@ -1,0 +1,33 @@
+<%= form_for(@bsb_feed) do |f| %>
+  <% if @bsb_feed.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@bsb_feed.errors.count, "error") %> prohibited this bsb_feed from being saved:</h2>
+
+      <ul>
+      <% @bsb_feed.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :title %><br />
+    <%= f.text_field :title %>
+  </div>
+  <div class="field">
+    <%= f.label :last_update %><br />
+    <%= f.time_select :last_update %>
+  </div>
+  <div class="field">
+    <%= f.label :url %><br />
+    <%= f.text_field :url %>
+  </div>
+  <div class="field">
+    <%= f.label :read_index %><br />
+    <%= f.number_field :read_index %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

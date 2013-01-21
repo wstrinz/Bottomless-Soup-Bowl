@@ -1,4 +1,7 @@
 BottomlessSoupBowl::Application.routes.draw do
+  resources :bsb_feeds
+
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

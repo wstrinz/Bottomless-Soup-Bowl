@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Title:</b>
+  <%= @bsb_feed.title %>
+</p>
+
+<p>
+  <b>Last update:</b>
+  <%= @bsb_feed.last_update %>
+</p>
+
+<p>
+  <b>Url:</b>
+  <%= @bsb_feed.url %>
+</p>
+
+<p>
+  <b>Read index:</b>
+  <%= @bsb_feed.read_index %>
+</p>
+
+
+<%= link_to 'Edit', edit_bsb_feed_path(@bsb_feed) %> |
+<%= link_to 'Back', bsb_feeds_path %>
