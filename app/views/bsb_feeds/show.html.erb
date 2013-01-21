@@ -1,8 +1,29 @@
 <p id="notice"><%= notice %></p>
 
+
+<%= link_to 'Prev', prev_feed_story_path(@bsb_feed) %>
+<%= link_to 'Next', next_feed_story_path(@bsb_feed) %>
+
 <p>
-  <b>Title:</b>
-  <%= @bsb_feed.title %>
+  <b><%= link_to @stitle, @surl, :target => "_blank" %></b>
+</p>
+<p>
+  <%= @spublished %>
+</p>
+<p>
+  <%= @scontent %>
+</p>
+
+
+<%= link_to 'Prev', prev_feed_story_path(@bsb_feed) %>
+<%= link_to 'Next', next_feed_story_path(@bsb_feed) %>
+<p></p>
+<%= link_to 'Edit', edit_bsb_feed_path(@bsb_feed) %> |
+<%= link_to 'Back', bsb_feeds_path %> |
+<%= link_to 'Refresh', refresh_bsb_feed_path(@bsb_feed) %>
+
+<p>
+  <b><%= link_to @bsb_feed.title, @bsb_feed.url %></b>
 </p>
 
 <p>
@@ -11,15 +32,6 @@
 </p>
 
 <p>
-  <b>Url:</b>
-  <%= @bsb_feed.url %>
-</p>
-
-<p>
   <b>Read index:</b>
   <%= @bsb_feed.read_index %>
 </p>
-
-
-<%= link_to 'Edit', edit_bsb_feed_path(@bsb_feed) %> |
-<%= link_to 'Back', bsb_feeds_path %>

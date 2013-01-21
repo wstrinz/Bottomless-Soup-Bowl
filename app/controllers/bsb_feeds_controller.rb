@@ -14,6 +14,16 @@ class BsbFeedsController < ApplicationController
   # GET /bsb_feeds/1.json
   def show
     @bsb_feed = BsbFeed.find(params[:id])
+    story = @bsb_feed.current_story
+    if story.nil?
+      @bsb_feed.update_feed
+      story = @bsb_feed.current_story
+    end
+
+    @stitle = story.title
+    @surl = story.url
+    @spublished = story.published
+    @scontent = story.content.sanitize.html_safe
 
     respond_to do |format|
       format.html # show.html.erb
@@ -41,6 +51,7 @@ class BsbFeedsController < ApplicationController
   # POST /bsb_feeds.json
   def create
     @bsb_feed = BsbFeed.new(params[:bsb_feed])
+    @bsb_feed.update_feed
 
     respond_to do |format|
       if @bsb_feed.save
@@ -77,6 +88,51 @@ class BsbFeedsController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to bsb_feeds_url }
+      format.json { head :no_content }
+    end
+  end
+
+  def refresh
+    @bsb_feed = BsbFeed.find(params[:id])
+    @bsb_feed.update_feed
+
+    respond_to do |format|
+      format.html { redirect_to @bsb_feed }
+      format.json { head :no_content }
+    end
+  end
+
+  def refresh_all
+    bsb_feed.all.each do |box|
+      box.update_feed
+    end
+
+    respond_to do |format|
+      format.html { redirect_to @bsb_feed  }
+      format.json { head :no_content }
+    end
+  end
+
+  def next
+    @bsb_feed = BsbFeed.find(params[:id])
+    @bsb_feed.next_article
+    # @bsb_feed.read_index+=1
+    # @bsb_feed.save
+
+    respond_to do |format|
+      format.html { redirect_to @bsb_feed  }
+      format.json { head :no_content }
+    end
+  end
+
+  def prev
+    @bsb_feed = BsbFeed.find(params[:id])
+    @bsb_feed.prev_article
+    # @bsb_feed.read_index-=1
+    # @bsb_feed.save
+
+    respond_to do |format|
+      format.html { redirect_to @bsb_feed  }
       format.json { head :no_content }
     end
   end

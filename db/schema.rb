@@ -11,11 +11,11 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130121193433) do
+ActiveRecord::Schema.define(:version => 20130121203848) do
 
   create_table "bsb_feeds", :force => true do |t|
     t.string   "title"
-    t.time     "last_update"
+    t.datetime "last_update"
     t.string   "url"
     t.integer  "read_index"
     t.datetime "created_at",  :null => false
@@ -28,8 +28,9 @@ ActiveRecord::Schema.define(:version => 20130121193433) do
     t.string   "url"
     t.time     "published"
     t.text     "content"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+    t.integer  "bsb_feed_id"
   end
 
 end
