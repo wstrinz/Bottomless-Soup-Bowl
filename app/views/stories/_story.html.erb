@@ -1,0 +1,14 @@
+<p>
+  <li><%= link_to story.bsb_feed.title, story.bsb_feed.url, :target => "_blank" %></li>
+  <b><%= link_to story.title, story.url, :target => "_blank", data: { keybinding: 'o' } %></b>
+</p>
+<p>
+  <%= story.published %>
+</p>
+<p>
+  <% if story.content %>
+  <%= story.content.html_safe %>
+  <% elsif story. summary %>
+  <%= story.summary.html_safe %>
+  <% end %>
+</p>

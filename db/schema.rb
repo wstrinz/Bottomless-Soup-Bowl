@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130121203848) do
+ActiveRecord::Schema.define(:version => 20130122194857) do
 
   create_table "bsb_feeds", :force => true do |t|
     t.string   "title"
@@ -26,7 +26,7 @@ ActiveRecord::Schema.define(:version => 20130121203848) do
     t.string   "summary"
     t.string   "title"
     t.string   "url"
-    t.time     "published"
+    t.datetime "published"
     t.text     "content"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false

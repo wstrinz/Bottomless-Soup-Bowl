@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<%= link_to 'Prev', prev_all_story_path, data: { keybinding: 'k' } %>
+<%= link_to 'Next', next_all_story_path, data: { keybinding: 'j' } %>
+
+<%= render @story %>
+
+
+<%= link_to 'Start',start_all_story_path,  data: { keybinding: 'q' } %>
+<%= link_to 'Prev (k)', prev_all_story_path %>
+<%= link_to 'Next (j)', next_all_story_path %>
+<p></p>
+<%= link_to 'Back', bsb_feeds_path, data: { keybinding: 'b' } %> |
+<%= link_to 'Refresh', refresh_all_path, data: { keybinding: 'r' } %>
+<%= link_to '', new_bsb_feed_path, data: { keybinding: 'a' } %>
+
+<p>
+  <b>Read index:</b>
+  <%= session[:all_index]%>
+</p>

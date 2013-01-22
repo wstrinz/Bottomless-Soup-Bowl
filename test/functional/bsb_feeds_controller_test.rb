@@ -3,6 +3,7 @@ require 'test_helper'
 class BsbFeedsControllerTest < ActionController::TestCase
   setup do
     @bsb_feed = bsb_feeds(:one)
+    @bsb_feed.reload_attributes
   end
 
   test "should get index" do
@@ -18,7 +19,7 @@ class BsbFeedsControllerTest < ActionController::TestCase
 
   test "should create bsb_feed" do
     assert_difference('BsbFeed.count') do
-      post :create, bsb_feed: { last_update: @bsb_feed.last_update, read_index: @bsb_feed.read_index, title: @bsb_feed.title, url: @bsb_feed.url }
+      post :create, bsb_feed: {url: @bsb_feed.url }
     end
 
     assert_redirected_to bsb_feed_path(assigns(:bsb_feed))

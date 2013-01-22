@@ -4,6 +4,6 @@ class ChangePublishedFormatInBsbFeeds < ActiveRecord::Migration
   end
 
   def down
-    change_column :bsb_feeds, :last_update, :date
+    change_column :bsb_feeds, :last_update, :time
   end
 end

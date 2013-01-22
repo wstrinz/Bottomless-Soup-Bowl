@@ -14,19 +14,19 @@ class BsbFeedsController < ApplicationController
   # GET /bsb_feeds/1.json
   def show
     @bsb_feed = BsbFeed.find(params[:id])
-    story = @bsb_feed.current_story
-    if story.nil?
+    @story = @bsb_feed.current_story
+    if @story.nil?
       @bsb_feed.update_feed
-      story = @bsb_feed.current_story
+      @story = @bsb_feed.current_story
     end
 
-    @stitle = story.title
-    @surl = story.url
-    @spublished = story.published
-    if story.content
-      @scontent = story.content.sanitize.html_safe
-    elsif story.summary
-      @scontent = story.summary.sanitize.html_safe
+    @stitle = @story.title
+    @surl = @story.url
+    @spublished = @story.published
+    if @story.content
+      @scontent = @story.content.sanitize.html_safe
+    elsif @story.summary
+      @scontent = @story.summary.sanitize.html_safe
     end
 
     respond_to do |format|
@@ -107,12 +107,12 @@ class BsbFeedsController < ApplicationController
   end
 
   def refresh_all
-    bsb_feed.all.each do |box|
-      box.update_feed
+    BsbFeed.all.each do |bfeed|
+      bfeed.update_feed
     end
 
     respond_to do |format|
-      format.html { redirect_to @bsb_feed  }
+      format.html { redirect_to all_bsb_feeds_path  }
       format.json { head :no_content }
     end
   end
@@ -148,6 +148,49 @@ class BsbFeedsController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to @bsb_feed  }
+      format.json { head :no_content }
+    end
+  end
+
+  def next_all
+    session[:all_index]+=1
+
+    respond_to do |format|
+      format.html { redirect_to all_bsb_feeds_path  }
+      format.json { head :no_content }
+    end
+  end
+
+  def prev_all
+    session[:all_index] -= 1
+
+    respond_to do |format|
+      format.html { redirect_to all_bsb_feeds_path  }
+      format.json { head :no_content }
+    end
+  end
+
+  def start_all
+    session[:all_index] = 0
+
+    respond_to do |format|
+      format.html { redirect_to all_bsb_feeds_path  }
+      format.json { head :no_content }
+    end
+  end
+
+  def all
+    if session[:all_index].nil?
+      session[:all_index] = 0
+    end
+
+    @story = Story.all.sort_by(&:published).reverse![session[:all_index]]
+
+    # @bsb_feed.read_index-=1
+    # @bsb_feed.save
+
+    respond_to do |format|
+      format.html
       format.json { head :no_content }
     end
   end

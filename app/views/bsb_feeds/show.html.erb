@@ -6,15 +6,7 @@
 <%= link_to 'Prev', prev_feed_story_path(@bsb_feed), data: { keybinding: 'k' } %>
 <%= link_to 'Next', next_feed_story_path(@bsb_feed), data: { keybinding: 'j' } %>
 
-<p>
-  <b><%= link_to @stitle, @surl, :target => "_blank", data: { keybinding: 'o' } %></b>
-</p>
-<p>
-  <%= @spublished %>
-</p>
-<p>
-  <%= @scontent %>
-</p>
+<%= render @story %>
 
 
 <%= link_to 'Start',start_feed_story_path(@bsb_feed), data: { keybinding: 'q' } %>

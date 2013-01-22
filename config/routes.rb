@@ -6,6 +6,13 @@ BottomlessSoupBowl::Application.routes.draw do
   match 'bsb_feeds/:id/prev' => 'bsb_feeds#prev', :as => :prev_feed_story
   match 'bsb_feeds/:id/start' => 'bsb_feeds#start', :as => :start_feed_story
 
+  match 'all_bsb_feeds' => 'bsb_feeds#all', :as => :all_bsb_feeds
+
+  match 'all_bsb_feeds/refresh' => 'bsb_feeds#refresh_all', :as => :refresh_all
+  match 'all_bsb_feeds/next' => 'bsb_feeds#next_all', :as => :next_all_story
+  match 'all_bsb_feeds/prev' => 'bsb_feeds#prev_all', :as => :prev_all_story
+  match 'all_bsb_feeds/start' => 'bsb_feeds#start_all', :as => :start_all_story
+
   root :to => 'bsb_feeds', :action => 'index'
 
   # The priority is based upon order of creation:
