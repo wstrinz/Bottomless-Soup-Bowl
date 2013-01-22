@@ -1,5 +1,5 @@
 class Story < ActiveRecord::Base
-  attr_accessible :content, :published, :summary, :title, :url
+  attr_accessible :content, :published, :summary, :title, :url, :author
 
   belongs_to :bsb_feed
 end

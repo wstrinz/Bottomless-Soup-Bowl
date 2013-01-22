@@ -7,7 +7,8 @@ class BsbFeed < ActiveRecord::Base
     if(@feed)
       stories.destroy_all
       @feed.entries.each do |entry|
-        stories.build(summary: entry.summary, title: entry.title, url: entry.url, published: entry.published, content: entry.content)
+        stories.build(summary: entry.summary, title: entry.title, url: entry.url,
+          published: entry.published, content: entry.content, author: entry.author)
       end
       @ordered_stories = stories.order("published DESC")
       self.last_update = @feed.last_modified
@@ -26,13 +27,16 @@ class BsbFeed < ActiveRecord::Base
         stories.build(summary: entry.summary, title: entry.title, url: entry.url, published: entry.published, content: entry.content)
       end
     end
-    @ordered_stories = stories.order("published DESC")
+    @ordered_stories = stories.all.sort_by(&:published).reverse
     self.last_update = @feed.last_modified
     self.save
   end
 
   def current_story
-    stories.order("published ASC")[read_index] #should not refresh
+    if(!@ordered_stories || @ordered_stories.empty)
+      @ordered_stories = stories.all.sort_by(&:published).reverse
+    end
+    @ordered_stories[read_index]
   end
 
   def next_article

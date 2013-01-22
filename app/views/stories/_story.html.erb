@@ -1,6 +1,7 @@
 <p>
   <li><%= link_to story.bsb_feed.title, story.bsb_feed.url, :target => "_blank" %></li>
-  <b><%= link_to story.title, story.url, :target => "_blank", data: { keybinding: 'o' } %></b>
+  <li><b><%= link_to story.title, story.url, :target => "_blank", data: { keybinding: 'o' } %></b></li>
+  <li><%= story.author %>
 </p>
 <p>
   <%= story.published %>

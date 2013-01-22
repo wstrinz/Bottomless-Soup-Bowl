@@ -184,7 +184,7 @@ class BsbFeedsController < ApplicationController
       session[:all_index] = 0
     end
 
-    @story = Story.all.sort_by(&:published).reverse![session[:all_index]]
+    @story = Story.all.sort_by(&:published).reverse[session[:all_index]]
 
     # @bsb_feed.read_index-=1
     # @bsb_feed.save
