@@ -23,7 +23,11 @@ class BsbFeedsController < ApplicationController
     @stitle = story.title
     @surl = story.url
     @spublished = story.published
-    @scontent = story.content.sanitize.html_safe
+    if story.content
+      @scontent = story.content.sanitize.html_safe
+    elsif story.summary
+      @scontent = story.summary.sanitize.html_safe
+    end
 
     respond_to do |format|
       format.html # show.html.erb
@@ -130,6 +134,17 @@ class BsbFeedsController < ApplicationController
     @bsb_feed.prev_article
     # @bsb_feed.read_index-=1
     # @bsb_feed.save
+
+    respond_to do |format|
+      format.html { redirect_to @bsb_feed  }
+      format.json { head :no_content }
+    end
+  end
+
+  def start
+    @bsb_feed = BsbFeed.find(params[:id])
+    @bsb_feed.read_index = 0
+    @bsb_feed.save
 
     respond_to do |format|
       format.html { redirect_to @bsb_feed  }

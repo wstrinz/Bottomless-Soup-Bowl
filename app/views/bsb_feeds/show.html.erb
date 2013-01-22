@@ -1,3 +1,14 @@
+<%= javascript_include_tag "shortcut.js" %>
+
+
+<%=javascript_tag "shortcut.add(\"j\",function() {
+  $.ajax ({
+    url: $(this).href,
+    datatype: 'script'
+    });
+  return false;
+});" %>
+<%=javascript_tag "shortcut.add(\"k\",function() { alert(\"Hello!\"); });" %>
 <p id="notice"><%= notice %></p>
 
 
@@ -15,6 +26,7 @@
 </p>
 
 
+<%= link_to 'Start',start_feed_story_path(@bsb_feed) %>
 <%= link_to 'Prev', prev_feed_story_path(@bsb_feed) %>
 <%= link_to 'Next', next_feed_story_path(@bsb_feed) %>
 <p></p>

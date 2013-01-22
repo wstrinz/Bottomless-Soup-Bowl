@@ -4,6 +4,7 @@ BottomlessSoupBowl::Application.routes.draw do
   match 'bsb_feeds/:id/refresh' => 'bsb_feeds#refresh', :as => :refresh_bsb_feed
   match 'bsb_feeds/:id/next' => 'bsb_feeds#next', :as => :next_feed_story
   match 'bsb_feeds/:id/prev' => 'bsb_feeds#prev', :as => :prev_feed_story
+  match 'bsb_feeds/:id/start' => 'bsb_feeds#start', :as => :start_feed_story
 
   root :to => 'bsb_feeds', :action => 'index'
 

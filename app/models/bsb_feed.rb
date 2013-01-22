@@ -4,16 +4,18 @@ class BsbFeed < ActiveRecord::Base
 
   def reload_attributes
     @feed = Feedzirra::Feed.fetch_and_parse(url)
+    stories.destroy_all
     @feed.entries.each do |entry|
       stories.build(summary: entry.summary, title: entry.title, url: entry.url, published: entry.published, content: entry.content)
     end
+    @ordered_stories = stories.order("published DESC")
     self.last_update = @feed.last_modified
     self.read_index = 0
     self.title = @feed.title
   end
 
   def update_feed
-    if @feed.nil?
+    if !@feed
       reload_attributes
     end
     @feed = Feedzirra::Feed.update(@feed)
@@ -22,12 +24,13 @@ class BsbFeed < ActiveRecord::Base
         stories.build(summary: entry.summary, title: entry.title, url: entry.url, published: entry.published, content: entry.content)
       end
     end
+    @ordered_stories = stories.order("published DESC")
     self.last_update = @feed.last_modified
     self.save
   end
 
   def current_story
-    stories[read_index]
+    stories.order("published DESC")[read_index] #should not refresh
   end
 
   def next_article
