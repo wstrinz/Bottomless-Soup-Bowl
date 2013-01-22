@@ -65,6 +65,7 @@ GEM
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
     mime-types (1.19)
+    mousetrap-rails (0.0.8)
     multi_json (1.5.0)
     nokogiri (1.4.7)
     polyglot (0.3.3)
@@ -123,6 +124,7 @@ DEPENDENCIES
   coffee-rails (~> 3.2.1)
   feedzirra
   jquery-rails
+  mousetrap-rails
   rails (= 3.2.11)
   sass-rails (~> 3.2.3)
   sqlite3

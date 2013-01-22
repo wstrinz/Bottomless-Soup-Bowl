@@ -1,22 +1,13 @@
 <%= javascript_include_tag "shortcut.js" %>
 
-
-<%=javascript_tag "shortcut.add(\"j\",function() {
-  $.ajax ({
-    url: $(this).href,
-    datatype: 'script'
-    });
-  return false;
-});" %>
-<%=javascript_tag "shortcut.add(\"k\",function() { alert(\"Hello!\"); });" %>
 <p id="notice"><%= notice %></p>
 
 
-<%= link_to 'Prev', prev_feed_story_path(@bsb_feed) %>
-<%= link_to 'Next', next_feed_story_path(@bsb_feed) %>
+<%= link_to 'Prev', prev_feed_story_path(@bsb_feed), data: { keybinding: 'k' } %>
+<%= link_to 'Next', next_feed_story_path(@bsb_feed), data: { keybinding: 'j' } %>
 
 <p>
-  <b><%= link_to @stitle, @surl, :target => "_blank" %></b>
+  <b><%= link_to @stitle, @surl, :target => "_blank", data: { keybinding: 'o' } %></b>
 </p>
 <p>
   <%= @spublished %>
@@ -26,13 +17,13 @@
 </p>
 
 
-<%= link_to 'Start',start_feed_story_path(@bsb_feed) %>
-<%= link_to 'Prev', prev_feed_story_path(@bsb_feed) %>
-<%= link_to 'Next', next_feed_story_path(@bsb_feed) %>
+<%= link_to 'Start',start_feed_story_path(@bsb_feed), data: { keybinding: 'q' } %>
+<%= link_to 'Prev (k)', prev_feed_story_path(@bsb_feed) %>
+<%= link_to 'Next (j)', next_feed_story_path(@bsb_feed) %>
 <p></p>
-<%= link_to 'Edit', edit_bsb_feed_path(@bsb_feed) %> |
-<%= link_to 'Back', bsb_feeds_path %> |
-<%= link_to 'Refresh', refresh_bsb_feed_path(@bsb_feed) %>
+<%= link_to 'Back', bsb_feeds_path, data: { keybinding: 'b' } %> |
+<%= link_to 'Refresh', refresh_bsb_feed_path(@bsb_feed), data: { keybinding: 'r' } %>
+<%= link_to '', new_bsb_feed_path, data: { keybinding: 'a' } %>
 
 <p>
   <b><%= link_to @bsb_feed.title, @bsb_feed.url %></b>
