@@ -1,10 +1,15 @@
+
 class BsbFeed < ActiveRecord::Base
   attr_accessible :last_update, :read_index, :title, :url
+  #validates :title, presence: true
+  validates_with FeedValidator
+
   has_many :stories
+  belongs_to :user
 
   def reload_attributes
     @feed = Feedzirra::Feed.fetch_and_parse(url)
-    if(@feed)
+    # if(@feed)
       stories.destroy_all
       @feed.entries.each do |entry|
         stories.build(summary: entry.summary, title: entry.title, url: entry.url,
@@ -14,7 +19,7 @@ class BsbFeed < ActiveRecord::Base
       self.last_update = @feed.last_modified
       self.read_index = 0
       self.title = @feed.title
-    end
+    # end
   end
 
   def update_feed
@@ -22,7 +27,11 @@ class BsbFeed < ActiveRecord::Base
       reload_attributes
     end
     @feed = Feedzirra::Feed.update(@feed)
-    unless @feed.new_entries.empty?
+    if @feed.is_a? Array
+      logger.error("Feed is array for #{url}")
+    elsif @feed.is_a? Fixnum
+      logger.error("Failed to read feed for #{url}")
+    elsif !@feed.new_entries.empty?
       @feed.new_entries.each do |entry|
         stories.build(summary: entry.summary, title: entry.title, url: entry.url, published: entry.published, content: entry.content)
       end
@@ -53,4 +62,8 @@ class BsbFeed < ActiveRecord::Base
     end
   end
 
+  def set_user(usar)
+    self.user = usar
+    self.save
+  end
 end

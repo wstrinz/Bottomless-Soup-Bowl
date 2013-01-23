@@ -55,7 +55,6 @@ class BsbFeedsController < ApplicationController
   # POST /bsb_feeds.json
   def create
     @bsb_feed = BsbFeed.new(params[:bsb_feed])
-    @bsb_feed.update_feed
 
     respond_to do |format|
       if @bsb_feed.save
@@ -65,6 +64,10 @@ class BsbFeedsController < ApplicationController
         format.html { render action: "new" }
         format.json { render json: @bsb_feed.errors, status: :unprocessable_entity }
       end
+    end
+
+    if @bsb_feed.valid?
+      @bsb_feed.update_feed
     end
   end
 
@@ -172,7 +175,6 @@ class BsbFeedsController < ApplicationController
 
   def start_all
     session[:all_index] = 0
-
     respond_to do |format|
       format.html { redirect_to all_bsb_feeds_path  }
       format.json { head :no_content }
@@ -185,9 +187,9 @@ class BsbFeedsController < ApplicationController
     end
 
     @story = Story.all.sort_by(&:published).reverse[session[:all_index]]
-
-    # @bsb_feed.read_index-=1
-    # @bsb_feed.save
+    if !@story.bsb_feed.user
+      @story.bsb_feed.set_user(current_user)
+    end
 
     respond_to do |format|
       format.html

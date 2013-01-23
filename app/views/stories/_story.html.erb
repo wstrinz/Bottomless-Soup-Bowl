@@ -1,4 +1,7 @@
 <p>
+  <%= story.bsb_feed.user %>
+</p>
+<p>
   <li><%= link_to story.bsb_feed.title, story.bsb_feed.url, :target => "_blank" %></li>
   <li><b><%= link_to story.title, story.url, :target => "_blank", data: { keybinding: 'o' } %></b></li>
   <li><%= story.author %>

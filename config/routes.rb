@@ -1,4 +1,10 @@
 BottomlessSoupBowl::Application.routes.draw do
+  get "users/index"
+
+  get "users/show"
+
+  devise_for :users
+
   resources :bsb_feeds
 
   match 'bsb_feeds/:id/refresh' => 'bsb_feeds#refresh', :as => :refresh_bsb_feed
