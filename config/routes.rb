@@ -1,6 +1,5 @@
 BottomlessSoupBowl::Application.routes.draw do
   get "users/index"
-
   get "users/show"
 
   devise_for :users
@@ -19,7 +18,11 @@ BottomlessSoupBowl::Application.routes.draw do
   match 'all_bsb_feeds/prev' => 'bsb_feeds#prev_all', :as => :prev_all_story
   match 'all_bsb_feeds/start' => 'bsb_feeds#start_all', :as => :start_all_story
 
-  root :to => 'bsb_feeds', :action => 'index'
+  match 'users/showfeeds/:id' => 'users#show', :as => :user
+
+  match 'users' => 'users#index'
+
+  root :to => 'users', :action => 'index'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

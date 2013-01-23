@@ -1,2 +1,31 @@
-<h1>Users#show</h1>
-<p>Find me in app/views/users/show.html.erb</p>
+<h1>Listing Feeds For <%= @user.email %></h1>
+
+<%= link_to 'All', all_bsb_feeds_path %>
+
+<table>
+  <tr>
+    <th>Title</th>
+    <th>Last update</th>
+    <th>Url</th>
+    <th>Read index</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @bsb_feeds.each do |bsb_feed| %>
+  <tr>
+    <td><%= bsb_feed.title %></td>
+    <td><%= bsb_feed.last_update %></td>
+    <td><%= bsb_feed.url %></td>
+    <td><%= bsb_feed.read_index %></td>
+    <td><%= link_to 'Show', bsb_feed %></td>
+    <td><%= link_to 'Edit', edit_bsb_feed_path(bsb_feed) %></td>
+    <td><%= link_to 'Destroy', bsb_feed, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Bsb feed', new_bsb_feed_path, data: { keybinding: 'a' }  %>

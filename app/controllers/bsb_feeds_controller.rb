@@ -54,7 +54,7 @@ class BsbFeedsController < ApplicationController
   # POST /bsb_feeds
   # POST /bsb_feeds.json
   def create
-    @bsb_feed = BsbFeed.new(params[:bsb_feed])
+    @bsb_feed = User.where("email = '#{current_user.email}'").first.bsb_feeds.build(params[:bsb_feed])
 
     respond_to do |format|
       if @bsb_feed.save
@@ -187,9 +187,9 @@ class BsbFeedsController < ApplicationController
     end
 
     @story = Story.all.sort_by(&:published).reverse[session[:all_index]]
-    if !@story.bsb_feed.user
-      @story.bsb_feed.set_user(current_user)
-    end
+    # if !@story.bsb_feed.user
+    #   @story.bsb_feed.set_user(current_user)
+    # end
 
     respond_to do |format|
       format.html
