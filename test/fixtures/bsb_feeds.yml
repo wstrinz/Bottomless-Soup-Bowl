@@ -1,9 +1,9 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
-  title: XKCD
+  title: Wolfram Blog
   last_update: 2013-01-21 13:33:25
-  url: http://xkcd.com/atom.xml
+  url: http://blog.wolframalpha.com/feed/
   read_index: 0
 
 two:

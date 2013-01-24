@@ -16,4 +16,10 @@ class User < ActiveRecord::Base
     end
   end
 
+  def remove_all_feeds
+    bsb_feeds.each do |bf|
+      bf.destroy
+    end
+  end
+
 end

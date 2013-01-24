@@ -15,24 +15,34 @@ class UsersController < ApplicationController
   end
 
   def do_feed_import
-    uploadfile = params[:user][:importfile]
-    #f = File.open(Rails.root.join('public','uploads',uploadfile.original_filename))
-    urls = import_feeds_from_xml(uploadfile)
+    if params[:user]
+      uploadfile = params[:user][:importfile]
+      #f = File.open(Rails.root.join('public','uploads',uploadfile.original_filename))
+      urls = import_feeds_from_xml(uploadfile)
 
-    urls.each do |u|
-      if BsbFeed.new(url: u).valid?
-        current_user.bsb_feeds.create!(url: u)
+      urls.each do |u|
+        bf = BsbFeed.new(url: u)
+        if bf.valid?
+          current_user.bsb_feeds.build(url: u)
+        end
       end
 
-      ## some debug code
-      # #fd = Feedzirra::Feed.fetch_and_parse(u)
-      # fd = u
-      # if !fd || (fd.is_a? Fixnum)
-      #   "err:#{u}"
-      # else
-      #   #fd.title
-      #   u
-      # end
+      current_user.bsb_feeds.each do |bf|
+        bf.update_feed
+      end
+    end
+
+    respond_to do |format|
+      format.html { redirect_to current_user }
+      format.json { head :no_content }
+    end
+  end
+
+  def remove_all_feeds
+    current_user.remove_all_feeds
+    respond_to do |format|
+      format.html { redirect_to current_user }
+      format.json { head :no_content }
     end
   end
 end

@@ -10,7 +10,7 @@ class BsbFeed < ActiveRecord::Base
 
   def reload_attributes
     @feed = Feedzirra::Feed.fetch_and_parse(url)
-    # if(@feed)
+    if(@feed && !(@feed.is_a? Fixnum))
       stories.destroy_all
       @feed.entries.each do |entry|
         stories.build(summary: entry.summary, title: entry.title, url: entry.url,
@@ -20,14 +20,16 @@ class BsbFeed < ActiveRecord::Base
       self.last_update = @feed.last_modified
       self.read_index = 0
       self.title = @feed.title
-    # end
+    end
   end
 
   def update_feed
     if !@feed
       reload_attributes
     end
-    @feed = Feedzirra::Feed.update(@feed)
+    if(@feed && !(@feed.is_a? Fixnum))
+      @feed = Feedzirra::Feed.update(@feed)
+    end
     if @feed.is_a? Array
       logger.error("Feed is array for #{url}")
     elsif @feed.is_a? Fixnum
@@ -36,9 +38,9 @@ class BsbFeed < ActiveRecord::Base
       @feed.new_entries.each do |entry|
         stories.build(summary: entry.summary, title: entry.title, url: entry.url, published: entry.published, content: entry.content)
       end
+      self.last_update = @feed.last_modified
     end
     @ordered_stories = stories.all.sort_by(&:published).reverse
-    self.last_update = @feed.last_modified
     self.save
   end
 

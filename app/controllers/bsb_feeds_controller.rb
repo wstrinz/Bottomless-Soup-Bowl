@@ -54,7 +54,7 @@ class BsbFeedsController < ApplicationController
   # POST /bsb_feeds
   # POST /bsb_feeds.json
   def create
-    @bsb_feed = User.where("email = '#{current_user.email}'").first.bsb_feeds.build(params[:bsb_feed])
+    @bsb_feed = current_user.bsb_feeds.build(params[:bsb_feed])
 
     respond_to do |format|
       if @bsb_feed.save

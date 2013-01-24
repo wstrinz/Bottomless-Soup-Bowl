@@ -28,7 +28,7 @@ BottomlessSoupBowl::Application.routes.draw do
 
   match 'do_feed_import' => 'users#do_feed_import', :as => :do_feed_import
 
-
+  match 'remove_all_feeds' => 'users#remove_all_feeds', :as => :remove_all_feeds
 
   root :to => 'users', :action => 'index'
 

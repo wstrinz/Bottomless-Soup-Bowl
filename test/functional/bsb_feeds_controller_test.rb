@@ -4,6 +4,10 @@ class BsbFeedsControllerTest < ActionController::TestCase
   setup do
     @bsb_feed = bsb_feeds(:one)
     @bsb_feed.reload_attributes
+
+    @user = User.new(email:"example@example.com", password:"12345678", password_confirmation: "12345678")
+    @user.save
+    sign_in @user
   end
 
   test "should get index" do
@@ -19,7 +23,7 @@ class BsbFeedsControllerTest < ActionController::TestCase
 
   test "should create bsb_feed" do
     assert_difference('BsbFeed.count') do
-      post :create, bsb_feed: {url: @bsb_feed.url }
+      post :create, bsb_feed: {url: "http://xkcd.com/atom.xml"}
     end
 
     assert_redirected_to bsb_feed_path(assigns(:bsb_feed))
@@ -31,7 +35,7 @@ class BsbFeedsControllerTest < ActionController::TestCase
   end
 
   test "should get edit" do
-    get :edit, id: @bsb_feed
+  get :edit, id: @bsb_feed
     assert_response :success
   end
 
