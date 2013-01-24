@@ -1,0 +1,6 @@
+<h1>Import Feeds</h1>
+
+<%= form_for @user, url: do_feed_import_path do |f| %>
+  <%= f.file_field :importfile %>
+  <%= f.submit "Submit" %>
+<% end  %>

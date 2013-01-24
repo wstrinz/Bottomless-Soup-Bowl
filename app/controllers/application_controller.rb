@@ -12,20 +12,6 @@ class ApplicationController < ActionController::Base
       end
     end
 
-    urls.each do |u|
-
-      current_user.bsb_feeds.create!(url: u)
-
-      ## some debug code
-      # #fd = Feedzirra::Feed.fetch_and_parse(u)
-      # fd = u
-      # if !fd || (fd.is_a? Fixnum)
-      #   "err:#{u}"
-      # else
-      #   #fd.title
-      #   u
-      # end
-
-    end
+    urls
   end
 end
