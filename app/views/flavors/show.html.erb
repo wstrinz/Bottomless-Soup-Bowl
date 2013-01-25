@@ -1,0 +1,28 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b><%= @flavor.name %> Soup</b>
+</p>
+
+<%= link_to 'Prev', prev_flavor_story_path(@flavor), data: { keybinding: 'k' } %>
+<%= link_to 'Next', next_flavor_story_path(@flavor), data: { keybinding: 'j' } %>
+
+<%= render @story %>
+
+
+<%= link_to 'Start',start_flavor_story_path(@flavor), data: { keybinding: 'q' } %>
+<%= link_to 'Prev (k)', prev_flavor_story_path(@flavor) %>
+<%= link_to 'Next (j)', next_flavor_story_path(@flavor) %>
+<p></p>
+<%= link_to 'Back', user_path(@flavor.user), data: { keybinding: 'b' } %> |
+<%= link_to 'Refresh', refresh_bsb_feed_path(@flavor), data: { keybinding: 'r' } %>
+<%= link_to '', new_bsb_feed_path, data: { keybinding: 'a' } %>
+
+<p>
+  <b>Read index:</b>
+  <%= @flavor.read_index %>
+</p>
+
+
+<%= link_to 'Edit', edit_flavor_path(@flavor) %> |
+<%= link_to 'Back', flavors_path %>

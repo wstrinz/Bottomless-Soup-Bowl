@@ -1,9 +1,11 @@
 BottomlessSoupBowl::Application.routes.draw do
+
   get "users/index"
   get "users/show"
 
   devise_for :users
 
+  resources :flavors
   resources :bsb_feeds
 
   match 'bsb_feeds/:id/refresh' => 'bsb_feeds#refresh', :as => :refresh_bsb_feed
@@ -20,6 +22,10 @@ BottomlessSoupBowl::Application.routes.draw do
 
   match 'users/showfeeds/:id' => 'users#show', :as => :user
 
+  match 'flavors/:id/refresh' => 'flavors#calculate_scores', :as => :calculate_flavor_scores
+  match 'flavors/:id/next' => 'flavors#next', :as => :next_flavor_story
+  match 'flavors/:id/prev' => 'flavors#prev', :as => :prev_flavor_story
+  match 'flavors/:id/start' => 'flavors#start', :as => :start_flavor_story
 
 
   match 'users' => 'users#index'

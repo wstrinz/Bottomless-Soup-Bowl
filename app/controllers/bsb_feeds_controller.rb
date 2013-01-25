@@ -54,7 +54,12 @@ class BsbFeedsController < ApplicationController
   # POST /bsb_feeds
   # POST /bsb_feeds.json
   def create
-    @bsb_feed = current_user.bsb_feeds.build(params[:bsb_feed])
+    @bsb_feed = BsbFeed.new(params[:bsb_feed])
+    @bsb_feed.user = current_user
+
+    if @bsb_feed.valid?
+      @bsb_feed.update_feed
+    end
 
     respond_to do |format|
       if @bsb_feed.save
@@ -66,9 +71,6 @@ class BsbFeedsController < ApplicationController
       end
     end
 
-    if @bsb_feed.valid?
-      @bsb_feed.update_feed
-    end
   end
 
   # PUT /bsb_feeds/1
