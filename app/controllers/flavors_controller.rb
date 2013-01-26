@@ -6,7 +6,7 @@ class FlavorsController < ApplicationController
   # GET /flavors.json
   def index
     @flavors = current_user.flavors.all
-    @algorithms = [["Facebook","fbook"],["Recentness","time"],["Mix","fbook_plus_time"]]
+    @algorithms = [["Facebook","fbook"],["Recentness","time"],["Mix","fbook_plus_time"]] #would like to not have to hardcode this
 
     respond_to do |format|
       format.html # index.html.erb
@@ -18,14 +18,17 @@ class FlavorsController < ApplicationController
   # GET /flavors/1.json
   def show
     @flavor = Flavor.find(params[:id])
-    #this seems like a bad way of doing things, but its temporary
+
     allstories = []
     @flavor.bsb_feeds.each do |bfeed|
       bfeed.stories.each do |story|
-        allstories << story
+        if(story && story.score)
+          allstories << story
+        end
       end
     end
 
+    #do not want to be sorting on every page view
     @story = allstories.sort_by(&:score).reverse[@flavor.read_index]
 
     respond_to do |format|
@@ -55,7 +58,9 @@ class FlavorsController < ApplicationController
   # POST /flavors.json
   def create
     @flavor = Flavor.new(params[:flavor])
+    @user = current_user
     incl_feeds = params["Feeds"]
+    puts params["Feeds"]
     incl_feeds.each do |t|
       fobj = BsbFeed.where("title = ?",t)
       if(fobj)
