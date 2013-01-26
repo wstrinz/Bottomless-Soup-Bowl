@@ -18,4 +18,11 @@
   <div class="actions">
     <%= f.submit %>
   </div>
+  <% @user.bsb_feeds.each do |feed| %>
+  <li>
+    <%= check_box_tag("Feeds[]",feed.title) %>
+    <%= " #{feed.title}" %>
+  </li>
+  <% end %>
+
 <% end %>

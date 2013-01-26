@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130125021539) do
+ActiveRecord::Schema.define(:version => 20130126014123) do
 
   create_table "bsb_feeds", :force => true do |t|
     t.string   "title"
@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(:version => 20130125021539) do
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
     t.integer  "user_id"
+    t.integer  "flavor_id"
   end
 
   create_table "flavors", :force => true do |t|
@@ -31,11 +32,12 @@ ActiveRecord::Schema.define(:version => 20130125021539) do
     t.integer  "user_id"
   end
 
-  create_table "scoring_algorithms", :force => true do |t|
+  create_table "sorters", :force => true do |t|
     t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
     t.integer  "flavor_id"
+    t.string   "algorithm"
   end
 
   create_table "stories", :force => true do |t|

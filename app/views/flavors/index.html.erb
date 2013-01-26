@@ -15,6 +15,18 @@
     <td><%= link_to 'Sort', calculate_flavor_scores_path(flavor) %></td>
     <td><%= link_to 'Edit', edit_flavor_path(flavor) %></td>
     <td><%= link_to 'Destroy', flavor, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <td><%= form_tag set_flavor_algorithm_path(flavor) do %>
+
+        <%= select_tag 'algorithm',
+
+          options_for_select(@algorithms, flavor.sorter.algorithm),
+
+          onchange: 'this.form.submit()' %>
+        <%= submit_tag 'set' %>
+        <%= javascript_tag "$('.locale input').hide()" %>
+        <% end %>
+        </td>
+
   </tr>
 <% end %>
 </table>

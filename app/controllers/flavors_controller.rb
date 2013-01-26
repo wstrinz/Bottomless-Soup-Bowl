@@ -1,10 +1,12 @@
 class FlavorsController < ApplicationController
+  @available_algorithms = [["Facebook","Fbook"],["Recentness","Time"]]
   before_filter :authenticate_user!
 
   # GET /flavors
   # GET /flavors.json
   def index
-    @flavors = Flavor.all
+    @flavors = current_user.flavors.all
+    @algorithms = [["Facebook","fbook"],["Recentness","time"],["Mix","fbook_plus_time"]]
 
     respond_to do |format|
       format.html # index.html.erb
@@ -36,6 +38,7 @@ class FlavorsController < ApplicationController
   # GET /flavors/new.json
   def new
     @flavor = Flavor.new
+    @user = current_user
 
     respond_to do |format|
       format.html # new.html.erb
@@ -52,8 +55,16 @@ class FlavorsController < ApplicationController
   # POST /flavors.json
   def create
     @flavor = Flavor.new(params[:flavor])
+    incl_feeds = params["Feeds"]
+    incl_feeds.each do |t|
+      fobj = BsbFeed.where("title = ?",t)
+      if(fobj)
+        @flavor.bsb_feeds << fobj
+      end
+    end
     @flavor.read_index = 0
     @flavor.user = current_user
+    @flavor.sorter = Sorter.create(name: "Default", algorithm: "Time")
     # if(@flavor.valid?)
     #   current_user.bsb_feeds.each do |bfeed|
     #     @flavor.bsb_feeds << bfeed
@@ -138,6 +149,19 @@ class FlavorsController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to @flavor  }
+      format.json { head :no_content }
+    end
+  end
+
+  def set_algorithm
+    @flavor = Flavor.find(params[:id])
+    if params[:algorithm]
+      @flavor.sorter.algorithm = params[:algorithm]
+      @flavor.sorter.save
+    end
+
+    respond_to do |format|
+      format.html { redirect_to flavors_path  }
       format.json { head :no_content }
     end
   end

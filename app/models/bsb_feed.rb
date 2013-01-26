@@ -7,6 +7,7 @@ class BsbFeed < ActiveRecord::Base
 
   has_many :stories
   belongs_to :user
+  belongs_to :flavor
 
   def reload_attributes
     @feed = Feedzirra::Feed.fetch_and_parse(url)
