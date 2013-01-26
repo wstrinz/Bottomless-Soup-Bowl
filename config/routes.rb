@@ -32,6 +32,7 @@ BottomlessSoupBowl::Application.routes.draw do
 
 
   match 'users' => 'users#index'
+  match 'users/:id/feeds' => 'users#feeds', :as => :user_feeds
 
   match 'import_feeds' => 'users#import_feeds', :as => :import_feeds
 

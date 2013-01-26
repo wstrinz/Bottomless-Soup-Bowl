@@ -45,4 +45,14 @@ class UsersController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def feeds
+    @user = User.find(params[:id])
+    @bsb_feeds = @user.bsb_feeds
+
+    respond_to do |format|
+      format.html
+      format.json { head :no_content }
+    end
+  end
 end
