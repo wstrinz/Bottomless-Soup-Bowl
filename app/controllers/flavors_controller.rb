@@ -6,7 +6,7 @@ class FlavorsController < ApplicationController
   # GET /flavors.json
   def index
     @flavors = current_user.flavors.all
-    @algorithms = [["Facebook","fbook"],["Recentness","time"],["Mix","fbook_plus_time"]] #would like to not have to hardcode this
+    @algorithms = [["Facebook","fbook"],["Timeliness","time"],["Mix","fbook_plus_time"]] #would like to not have to hardcode this
 
     respond_to do |format|
       format.html # index.html.erb
@@ -69,7 +69,7 @@ class FlavorsController < ApplicationController
     end
     @flavor.read_index = 0
     @flavor.user = current_user
-    @flavor.sorter = Sorter.create(name: "Default", algorithm: "Time")
+    @flavor.sorter = Sorter.create(name: "Default", algorithm: "time")
     # if(@flavor.valid?)
     #   current_user.bsb_feeds.each do |bfeed|
     #     @flavor.bsb_feeds << bfeed
@@ -78,7 +78,7 @@ class FlavorsController < ApplicationController
 
     respond_to do |format|
       if @flavor.save
-        format.html { redirect_to @flavor, notice: 'Flavor was successfully created.' }
+        format.html { redirect_to calculate_scores_path(@flavor) }
         format.json { render json: @flavor, status: :created, location: @flavor }
       else
         format.html { render action: "new" }
@@ -118,6 +118,8 @@ class FlavorsController < ApplicationController
   def calculate_scores
     @flavor = Flavor.find(params[:id])
     @flavor.score_stories
+    @flavor.read_index = 0
+    @flavor.save
 
     respond_to do |format|
       format.html { redirect_to @flavor }

@@ -26,7 +26,6 @@
         <%= javascript_tag "$('.locale input').hide()" %>
         <% end %>
         </td>
-
   </tr>
 <% end %>
 </table>
@@ -34,3 +33,4 @@
 <br />
 
 <%= link_to 'New Flavor', new_flavor_path %>
+<%= link_to 'Back', current_user, data: { keybinding: 'b' }  %>

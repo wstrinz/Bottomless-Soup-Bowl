@@ -41,7 +41,7 @@ BottomlessSoupBowl::Application.routes.draw do
 
   match 'remove_all_feeds' => 'users#remove_all_feeds', :as => :remove_all_feeds
 
-  root :to => 'users', :action => 'index'
+  root :to => 'users', :action => 'show_current'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

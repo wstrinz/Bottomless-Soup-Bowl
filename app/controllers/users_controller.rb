@@ -63,4 +63,11 @@ class UsersController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def show_current
+    respond_to do |format|
+      format.html { redirect_to current_user }
+      format.json { head :no_content }
+    end
+  end
 end

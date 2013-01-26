@@ -8,7 +8,7 @@ module ScoringAlgorithms
     if shares
       return shares["total_count"]
     end
-    return nil
+    return 0
   end
 
   def time(story)
