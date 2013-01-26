@@ -3,11 +3,19 @@ class UsersController < ApplicationController
 
   def index
     @users = User.all
+    @user = current_user
   end
 
   def show
     @user = User.find(params[:id])
     @bsb_feeds = @user.bsb_feeds
+
+    if(current_user != @user)
+      respond_to do |format|
+        format.html { redirect_to users_path, notice: "Not allowed to view other user's feeds" }
+        format.json { head :no_content }
+      end
+    end
   end
 
   def import_feeds

@@ -1,4 +1,6 @@
+<p id="notice"><%= notice %></p>
 <h1>Listing Users</h1>
+<li>Signed in as <%= @user.email %></li>
 
 <%= link_to 'logout', destroy_user_session_path %>
 
