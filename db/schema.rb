@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130126014123) do
+ActiveRecord::Schema.define(:version => 20130128005655) do
 
   create_table "bsb_feeds", :force => true do |t|
     t.string   "title"
@@ -51,6 +51,18 @@ ActiveRecord::Schema.define(:version => 20130126014123) do
     t.integer  "bsb_feed_id"
     t.string   "author"
     t.float    "score"
+  end
+
+  create_table "stories_users_stats", :id => false, :force => true do |t|
+    t.integer "story_id"
+    t.integer "user_stats_id"
+  end
+
+  create_table "user_stats", :force => true do |t|
+    t.integer  "total_read"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.integer  "user_id"
   end
 
   create_table "users", :force => true do |t|
