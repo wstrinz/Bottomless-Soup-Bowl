@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130128005655) do
+ActiveRecord::Schema.define(:version => 20130202050028) do
 
   create_table "bsb_feeds", :force => true do |t|
     t.string   "title"
@@ -22,6 +22,11 @@ ActiveRecord::Schema.define(:version => 20130128005655) do
     t.datetime "updated_at",  :null => false
     t.integer  "user_id"
     t.integer  "flavor_id"
+  end
+
+  create_table "bsb_feeds_users", :id => false, :force => true do |t|
+    t.integer "bsb_feed_id"
+    t.integer "user_id"
   end
 
   create_table "flavors", :force => true do |t|
@@ -46,11 +51,12 @@ ActiveRecord::Schema.define(:version => 20130128005655) do
     t.string   "url"
     t.datetime "published"
     t.text     "content"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
     t.integer  "bsb_feed_id"
     t.string   "author"
     t.float    "score"
+    t.integer  "user_stats_id"
   end
 
   create_table "stories_users_stats", :id => false, :force => true do |t|
@@ -78,6 +84,7 @@ ActiveRecord::Schema.define(:version => 20130128005655) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
+    t.datetime "last_refresh"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

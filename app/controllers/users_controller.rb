@@ -70,4 +70,13 @@ class UsersController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def refresh
+    current_user.refresh_stats
+
+    respond_to do |format|
+      format.html {redirect_to current_user}
+      format.json { head :no_content }
+    end
+  end
 end

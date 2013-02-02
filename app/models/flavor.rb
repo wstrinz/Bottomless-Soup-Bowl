@@ -3,7 +3,7 @@ class Flavor < ActiveRecord::Base
   belongs_to :user
   has_one :sorter
   has_many :bsb_feeds
-  #has_many :stories, through: :bsb_feeds
+  has_many :stories, through: :user
 
   def score_stories
     bsb_feeds.each do |bfeed|
@@ -12,6 +12,23 @@ class Flavor < ActiveRecord::Base
         story.save
       end
     end
+  end
+
+  def get_story(rindex, usr)
+    allstories = stories.order("score DESC")[rindex]
+    # allstories = []
+
+    # bsb_feeds.each do |bfeed|
+    #   bfeed.stories.each do |story|
+    #     if(story && story.score && usr.user_stats.stories.include?(story))
+    #       allstories << story
+    #     end
+    #   end
+    # end
+
+    #allstories[rindex]
+    #do not want to be sorting on every page view
+    #allstories.sort_by(&:score).reverse[@flavor.read_index]
   end
 
 end

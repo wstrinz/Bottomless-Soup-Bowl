@@ -4,4 +4,5 @@ class FeedValidator < ActiveModel::Validator
       record.errors[:base] << "Could not load feed at #{record.url}"
     end
   end
+
 end

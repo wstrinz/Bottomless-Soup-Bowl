@@ -30,7 +30,6 @@ BottomlessSoupBowl::Application.routes.draw do
   match 'flavors/:id/set_algorithm' => 'flavors#set_algorithm', :as => :set_flavor_algorithm
 
 
-
   match 'users' => 'users#index'
 
   match 'users/:id/feeds' => 'users#feeds', :as => :user_feeds
@@ -40,6 +39,7 @@ BottomlessSoupBowl::Application.routes.draw do
   match 'do_feed_import' => 'users#do_feed_import', :as => :do_feed_import
 
   match 'remove_all_feeds' => 'users#remove_all_feeds', :as => :remove_all_feeds
+
 
   root :to => 'users', :action => 'show_current'
 

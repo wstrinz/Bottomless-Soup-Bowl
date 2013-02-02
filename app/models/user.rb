@@ -6,11 +6,11 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :last_refresh
   # attr_accessible :title, :body
   has_one :user_stats
   has_many :stories, :through => :user_stats
-  has_many :bsb_feeds
+  has_and_belongs_to_many :bsb_feeds
   has_many :flavors
 
   def addFeed (feed)
@@ -25,4 +25,24 @@ class User < ActiveRecord::Base
     end
   end
 
+  def refresh_stats
+    if !last_refresh
+      last_refresh = Time.now - 2.days
+    end
+    bsb_feeds.each do |feed|
+      feed.update_feed
+      feed.stories.each do |story|
+        if(story.published > last_refresh)
+          user_stats.stories << story
+
+        end
+      end
+      #user_stats.stories.save
+    end
+    last_refresh = Time.now
+  end
+
+  def mark_read(story)
+    user_stats.stories.delete(story)
+  end
 end

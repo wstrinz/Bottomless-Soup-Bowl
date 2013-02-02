@@ -19,17 +19,7 @@ class FlavorsController < ApplicationController
   def show
     @flavor = Flavor.find(params[:id])
 
-    allstories = []
-    @flavor.bsb_feeds.each do |bfeed|
-      bfeed.stories.each do |story|
-        if(story && story.score)
-          allstories << story
-        end
-      end
-    end
-
-    #do not want to be sorting on every page view
-    @story = allstories.sort_by(&:score).reverse[@flavor.read_index]
+    @story = @flavor.get_story(@flavor.read_index, current_user)
 
     respond_to do |format|
       format.html # show.html.erb
@@ -60,7 +50,7 @@ class FlavorsController < ApplicationController
     @flavor = Flavor.new(params[:flavor])
     @user = current_user
     incl_feeds = params["Feeds"]
-    puts params["Feeds"]
+    #puts params["Feeds"]
     incl_feeds.each do |t|
       fobj = BsbFeed.where("title = ?",t)
       if(fobj)
@@ -78,7 +68,7 @@ class FlavorsController < ApplicationController
 
     respond_to do |format|
       if @flavor.save
-        format.html { redirect_to calculate_scores_path(@flavor) }
+        format.html { redirect_to calculate_flavor_scores_path(@flavor) }
         format.json { render json: @flavor, status: :created, location: @flavor }
       else
         format.html { render action: "new" }
@@ -129,7 +119,11 @@ class FlavorsController < ApplicationController
 
   def next
     @flavor = Flavor.find(params[:id])
-    @flavor.read_index+=1
+    if params[:keep_unread]
+      @flavor.read_index+=1
+    else
+      current_user.mark_read(@flavor.get_story(@flavor.read_index, current_user))
+    end
     @flavor.save
 
     respond_to do |format|
@@ -140,7 +134,11 @@ class FlavorsController < ApplicationController
 
   def prev
     @flavor = Flavor.find(params[:id])
-    @flavor.read_index-=1
+    if params[:keep_unread]
+      @flavor.read_index-=1
+    else
+      current_user.mark_read(@flavor.get_story(@flavor.read_index, current_user))
+    end
     @flavor.save
 
     respond_to do |format|

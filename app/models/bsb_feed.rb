@@ -3,10 +3,11 @@ class BsbFeed < ActiveRecord::Base
   attr_accessible :last_update, :read_index, :title, :url
   #validates :title, presence: true
   validates_with FeedValidator
-  validates :url, uniqueness: true
+  validates :url, uniqueness: true, presence: true
+  # validates_uniqueness_of :url, :scope => [:session_id]
 
   has_many :stories
-  belongs_to :user
+  has_and_belongs_to_many :users
   belongs_to :flavor
 
   def reload_attributes
@@ -31,7 +32,9 @@ class BsbFeed < ActiveRecord::Base
     if(@feed && !(@feed.is_a? Fixnum))
       @feed = Feedzirra::Feed.update(@feed)
     end
-    if @feed.is_a? Array
+    if !@feed
+      logger.error("Null feed")
+    elsif @feed.is_a? Array
       logger.error("Feed is array for #{url}")
     elsif @feed.is_a? Fixnum
       logger.error("Failed to read feed for #{url}")

@@ -55,6 +55,7 @@ class BsbFeedsController < ApplicationController
   # POST /bsb_feeds.json
   def create
     @bsb_feed = BsbFeed.new(params[:bsb_feed])
+    #if BsbFeed exists with same url, use it instead
     @bsb_feed.user = current_user
 
     if @bsb_feed.valid?
