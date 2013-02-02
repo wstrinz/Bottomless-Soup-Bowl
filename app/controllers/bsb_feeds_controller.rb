@@ -15,6 +15,7 @@ class BsbFeedsController < ApplicationController
   def show
     @bsb_feed = BsbFeed.find(params[:id])
     @story = @bsb_feed.current_story
+    @user = current_user
     if @story.nil?
       @bsb_feed.update_feed
       @story = @bsb_feed.current_story
@@ -56,7 +57,7 @@ class BsbFeedsController < ApplicationController
   def create
     @bsb_feed = BsbFeed.new(params[:bsb_feed])
     #if BsbFeed exists with same url, use it instead
-    @bsb_feed.user = current_user
+    @bsb_feed.users << current_user
 
     if @bsb_feed.valid?
       @bsb_feed.update_feed

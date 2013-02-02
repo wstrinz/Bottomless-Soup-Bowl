@@ -13,7 +13,7 @@
 <%= link_to 'Prev (k)', prev_feed_story_path(@bsb_feed) %>
 <%= link_to 'Next (j)', next_feed_story_path(@bsb_feed) %>
 <p></p>
-<%= link_to 'Back', user_feeds, data: { keybinding: 'b' } %> |
+<%= link_to 'Back', user_feeds_path(@user), data: { keybinding: 'b' } %> |
 <%= link_to 'Refresh', refresh_bsb_feed_path(@bsb_feed), data: { keybinding: 'r' } %>
 <%= link_to '', new_bsb_feed_path, data: { keybinding: 'a' } %>
 

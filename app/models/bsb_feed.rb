@@ -3,7 +3,7 @@ class BsbFeed < ActiveRecord::Base
   attr_accessible :last_update, :read_index, :title, :url
   #validates :title, presence: true
   validates_with FeedValidator
-  validates :url, uniqueness: true, presence: true
+  #validates :url, uniqueness: true, presence: true
   # validates_uniqueness_of :url, :scope => [:session_id]
 
   has_many :stories
