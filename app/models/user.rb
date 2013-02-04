@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
   # :token_authenticatable, :confirmable,
   # :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
+  :recoverable, :rememberable, :trackable, :validatable
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me, :last_refresh
@@ -27,14 +27,13 @@ class User < ActiveRecord::Base
 
   def refresh_stats
     if !last_refresh
-      last_refresh = Time.now - 2.days
+      last_refresh = Time.now - 7.days
     end
     bsb_feeds.each do |feed|
       feed.update_feed
       feed.stories.each do |story|
-        if(story.published > last_refresh)
+        if(story.published && (story.published > last_refresh))
           user_stats.stories << story
-
         end
       end
       #user_stats.stories.save
@@ -44,5 +43,29 @@ class User < ActiveRecord::Base
 
   def mark_read(story)
     user_stats.stories.delete(story)
+  end
+
+  def import_feeds(file)
+
+    urls = []
+
+    doc = Nokogiri::XML(file)
+    doc.xpath("//outline").each do |ent|
+      if ent.attribute("xmlUrl")
+        urls.push(ent.attribute("xmlUrl").value)
+      end
+    end
+    #urls = import_feeds_from_xml(file)
+
+    urls.each do |u|
+      bf = BsbFeed.new(url: u)
+      if bf.valid?
+        bsb_feeds << BsbFeed.new(url: u)
+      end
+    end
+
+    bsb_feeds.each do |bf|
+      bf.update_feed
+    end
   end
 end

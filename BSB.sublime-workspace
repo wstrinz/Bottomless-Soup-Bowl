@@ -3,31 +3,43 @@
 	{
 		"selected_items":
 		[
+			[
+				"curre",
+				"current_user"
+			]
 		]
 	},
 	"buffers":
 	[
 		{
-			"file": "app/models/scoring_algorithm.rb",
+			"file": "app/controllers/bsb_feeds_controller.rb",
 			"settings":
 			{
-				"buffer_size": 352,
+				"buffer_size": 4628,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "app/models/story.rb",
+			"file": "app/models/bsb_feed.rb",
 			"settings":
 			{
-				"buffer_size": 141,
+				"buffer_size": 2084,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "app/views/stories/_story.html.erb",
+			"file": "app/views/bsb_feeds/show.html.erb",
 			"settings":
 			{
-				"buffer_size": 433,
+				"buffer_size": 890,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "config/routes.rb",
+			"settings":
+			{
+				"buffer_size": 3443,
 				"line_ending": "Unix"
 			}
 		},
@@ -35,23 +47,7 @@
 			"file": "app/views/flavors/show.html.erb",
 			"settings":
 			{
-				"buffer_size": 650,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "app/models/flavor.rb",
-			"settings":
-			{
-				"buffer_size": 398,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "app/models/user_stats.rb",
-			"settings":
-			{
-				"buffer_size": 110,
+				"buffer_size": 920,
 				"line_ending": "Unix"
 			}
 		},
@@ -59,23 +55,31 @@
 			"file": "app/models/user.rb",
 			"settings":
 			{
-				"buffer_size": 823,
+				"buffer_size": 1272,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "db/migrate/20130128004754_create_stats_to_stories_join_table.rb",
+			"file": "lib/scoring_algorithms.rb",
 			"settings":
 			{
-				"buffer_size": 259,
+				"buffer_size": 566,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "app/controllers/users_controller.rb",
+			"file": "app/views/stories/_story.html.erb",
 			"settings":
 			{
-				"buffer_size": 1599,
+				"buffer_size": 432,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/models/flavor.rb",
+			"settings":
+			{
+				"buffer_size": 817,
 				"line_ending": "Unix"
 			}
 		}
@@ -86,6 +90,10 @@
 		"height": 392.0,
 		"selected_items":
 		[
+			[
+				"inde",
+				"Indentation: Reindent Lines"
+			],
 			[
 				"sni ou",
 				"Snippet: output ERB tags"
@@ -143,7 +151,7 @@
 				"Package Control: Install Package"
 			]
 		],
-		"width": 602.0
+		"width": 593.0
 	},
 	"console":
 	{
@@ -160,6 +168,10 @@
 	},
 	"file_history":
 	[
+		"/home/will/Documents/Projects/Bottomless-Soup-Bowl/app/controllers/bsb_feeds_controller.rb",
+		"/home/will/Documents/Games/rubywarrior/rubywarrior/ezstar-beginner/player.rb",
+		"/home/will/Documents/Games/rubywarrior/rubywarrior/ezstar-beginner/player.rb.silly",
+		"/home/will/Documents/Games/rubywarrior/rubywarrior/ezstar-beginner/player.rb.lvl4",
 		"/home/will/Documents/Projects/Bottomless-Soup-Bowl/BSB.sublime-workspace",
 		"/home/will/Documents/Projects/Bottomless-Soup-Bowl/BSB.sublime-project",
 		"/home/will/Documents/Projects/Bottomless-Soup-Bowl/db/migrate/20130125021539_add_foreign_key_to_scoring_algorithm.rb",
@@ -176,7 +188,7 @@
 	],
 	"find":
 	{
-		"height": 0.0
+		"height": 35.0
 	},
 	"find_in_files":
 	{
@@ -190,6 +202,12 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"AAACEdEose0cBAJMfJGFBFN49UjQNqwMOmWfwRuzZAMFCOUUkZAfDZA1FUmY0ceqn9ZAV3VUeobCd9girgpRbZB5zLX2tNfdjGcmT4LSrMigZDZD",
+			"arch",
+			"feel",
+			"1",
+			"under_attack",
+			"atk",
 			"stories_users_stats"
 		],
 		"highlight": true,
@@ -213,23 +231,75 @@
 			[
 				{
 					"buffer": 0,
-					"file": "app/models/scoring_algorithm.rb",
+					"file": "app/controllers/bsb_feeds_controller.rb",
 					"settings":
 					{
-						"buffer_size": 352,
+						"buffer_size": 4628,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								193,
-								193
+								418,
+								418
 							]
 						],
 						"settings":
 						{
 							"syntax": "Packages/Ruby/Ruby.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 162.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "app/models/bsb_feed.rb",
+					"settings":
+					{
+						"buffer_size": 2084,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								164,
+								164
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Ruby/Ruby.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 108.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "app/views/bsb_feeds/show.html.erb",
+					"settings":
+					{
+						"buffer_size": 890,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								519,
+								519
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Rails/HTML (Rails).tmLanguage"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -238,11 +308,11 @@
 					"type": "text"
 				},
 				{
-					"buffer": 1,
-					"file": "app/models/story.rb",
+					"buffer": 3,
+					"file": "config/routes.rb",
 					"settings":
 					{
-						"buffer_size": 141,
+						"buffer_size": 3443,
 						"regions":
 						{
 						},
@@ -258,103 +328,51 @@
 							"syntax": "Packages/Ruby/Ruby.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "app/views/stories/_story.html.erb",
-					"settings":
-					{
-						"buffer_size": 433,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								433,
-								433
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Rails/HTML (Rails).tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "app/views/flavors/show.html.erb",
-					"settings":
-					{
-						"buffer_size": 650,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								475,
-								475
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Rails/HTML (Rails).tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 324.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 4,
-					"file": "app/models/flavor.rb",
+					"file": "app/views/flavors/show.html.erb",
 					"settings":
 					{
-						"buffer_size": 398,
+						"buffer_size": 920,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								199,
-								199
+								0,
+								0
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Ruby/Ruby.tmLanguage"
+							"syntax": "Packages/Rails/HTML (Rails).tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 36.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 5,
-					"file": "app/models/user_stats.rb",
+					"file": "app/models/user.rb",
 					"settings":
 					{
-						"buffer_size": 110,
+						"buffer_size": 1272,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								105,
-								105
+								868,
+								868
 							]
 						],
 						"settings":
@@ -362,25 +380,25 @@
 							"syntax": "Packages/Ruby/Ruby.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 72.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 6,
-					"file": "app/models/user.rb",
+					"file": "lib/scoring_algorithms.rb",
 					"settings":
 					{
-						"buffer_size": 823,
+						"buffer_size": 566,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								735,
-								735
+								179,
+								179
 							]
 						],
 						"settings":
@@ -395,23 +413,23 @@
 				},
 				{
 					"buffer": 7,
-					"file": "db/migrate/20130128004754_create_stats_to_stories_join_table.rb",
+					"file": "app/views/stories/_story.html.erb",
 					"settings":
 					{
-						"buffer_size": 259,
+						"buffer_size": 432,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								212,
-								212
+								337,
+								337
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Ruby/Ruby.tmLanguage"
+							"syntax": "Packages/Rails/HTML (Rails).tmLanguage"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -421,18 +439,18 @@
 				},
 				{
 					"buffer": 8,
-					"file": "app/controllers/users_controller.rb",
+					"file": "app/models/flavor.rb",
 					"settings":
 					{
-						"buffer_size": 1599,
+						"buffer_size": 817,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								848,
-								848
+								659,
+								659
 							]
 						],
 						"settings":
@@ -440,7 +458,7 @@
 							"syntax": "Packages/Ruby/Ruby.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 90.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -490,6 +508,50 @@
 		"selected_items":
 		[
 			[
+				"flav",
+				"app/models/flavor.rb"
+			],
+			[
+				"_stor",
+				"app/views/stories/_story.html.erb"
+			],
+			[
+				"alg",
+				"lib/scoring_algorithms.rb"
+			],
+			[
+				"u",
+				"app/models/user.rb"
+			],
+			[
+				"flashow",
+				"app/views/flavors/show.html.erb"
+			],
+			[
+				"feedcon",
+				"app/controllers/bsb_feeds_controller.rb"
+			],
+			[
+				"routes",
+				"config/routes.rb"
+			],
+			[
+				"show",
+				"app/views/bsb_feeds/show.html.erb"
+			],
+			[
+				"bsbfeed",
+				"app/models/bsb_feed.rb"
+			],
+			[
+				"feecon",
+				"app/controllers/bsb_feeds_controller.rb"
+			],
+			[
+				"bsbfeecon",
+				"app/controllers/bsb_feeds_controller.rb"
+			],
+			[
 				"usercon",
 				"app/controllers/users_controller.rb"
 			],
@@ -504,10 +566,6 @@
 			[
 				"user_stats",
 				"app/models/user_stats.rb"
-			],
-			[
-				"_stor",
-				"app/views/stories/_story.html.erb"
 			],
 			[
 				"sco",

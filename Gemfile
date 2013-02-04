@@ -14,7 +14,7 @@ gem 'mousetrap-rails'
 gem 'devise'
 
 gem 'koala'
-#gem 'fb_graph'
+gem 'delayed_job_active_record'
 
 # Gems used only for assets and not required
 # in production environments by default.

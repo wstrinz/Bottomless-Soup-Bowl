@@ -23,21 +23,11 @@ class UsersController < ApplicationController
   end
 
   def do_feed_import
+
     if params[:user]
       uploadfile = params[:user][:importfile]
       #f = File.open(Rails.root.join('public','uploads',uploadfile.original_filename))
-      urls = import_feeds_from_xml(uploadfile)
-
-      urls.each do |u|
-        bf = BsbFeed.new(url: u)
-        if bf.valid?
-          current_user.bsb_feeds.build(url: u)
-        end
-      end
-
-      current_user.bsb_feeds.each do |bf|
-        bf.update_feed
-      end
+      current_user.import_feeds(uploadfile)
     end
 
     respond_to do |format|

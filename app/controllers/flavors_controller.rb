@@ -19,7 +19,7 @@ class FlavorsController < ApplicationController
   def show
     @flavor = Flavor.find(params[:id])
 
-    @story = @flavor.get_story(@flavor.read_index, current_user)
+    @story = @flavor.get_story(@flavor.read_index)
 
     respond_to do |format|
       format.html # show.html.erb
@@ -42,6 +42,7 @@ class FlavorsController < ApplicationController
   # GET /flavors/1/edit
   def edit
     @flavor = Flavor.find(params[:id])
+    @user = current_user
   end
 
   # POST /flavors
@@ -122,7 +123,7 @@ class FlavorsController < ApplicationController
     if params[:keep_unread]
       @flavor.read_index+=1
     else
-      current_user.mark_read(@flavor.get_story(@flavor.read_index, current_user))
+      current_user.mark_read(@flavor.get_story(@flavor.read_index))
     end
     @flavor.save
 
@@ -137,7 +138,7 @@ class FlavorsController < ApplicationController
     if params[:keep_unread]
       @flavor.read_index-=1
     else
-      current_user.mark_read(@flavor.get_story(@flavor.read_index, current_user))
+      current_user.mark_read(@flavor.get_story(@flavor.read_index))
     end
     @flavor.save
 
