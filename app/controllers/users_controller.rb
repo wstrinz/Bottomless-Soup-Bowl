@@ -8,6 +8,9 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    unless @user.user_stats
+      @user.create_user_stats
+    end
     @bsb_feeds = @user.bsb_feeds
 
     if(current_user != @user)
@@ -62,6 +65,15 @@ class UsersController < ApplicationController
   end
 
   def refresh
+    current_user.refresh_stats
+
+    respond_to do |format|
+      format.html {redirect_to current_user}
+      format.json { head :no_content }
+    end
+  end
+
+  def fetch
     current_user.refresh_stats
 
     respond_to do |format|

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130204020657) do
+ActiveRecord::Schema.define(:version => 20130205024750) do
 
   create_table "bsb_feeds", :force => true do |t|
     t.string   "title"
@@ -47,10 +47,11 @@ ActiveRecord::Schema.define(:version => 20130204020657) do
 
   create_table "flavors", :force => true do |t|
     t.string   "name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
     t.integer  "read_index"
     t.integer  "user_id"
+    t.integer  "sort_progress"
   end
 
   create_table "sorters", :force => true do |t|

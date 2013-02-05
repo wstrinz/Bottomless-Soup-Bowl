@@ -26,8 +26,8 @@ class User < ActiveRecord::Base
   end
 
   def refresh_stats
-    if !last_refresh
-      last_refresh = Time.now - 7.days
+    if !self.last_refresh
+      self.last_refresh = Time.now - 7.days
     end
     bsb_feeds.each do |feed|
       feed.update_feed
@@ -38,7 +38,8 @@ class User < ActiveRecord::Base
       end
       #user_stats.stories.save
     end
-    last_refresh = Time.now
+    self.last_refresh = Time.now
+    self.save
   end
 
   def mark_read(story)
@@ -67,5 +68,10 @@ class User < ActiveRecord::Base
     bsb_feeds.each do |bf|
       bf.update_feed
     end
+  end
+
+  def create_user_stats
+    self.user_stats = UserStats.new(:total_read => 0)
+    #user_stats.save
   end
 end

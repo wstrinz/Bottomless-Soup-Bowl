@@ -29,8 +29,8 @@ BottomlessSoupBowl::Application.routes.draw do
 
   match 'flavors/:id/set_algorithm' => 'flavors#set_algorithm', :as => :set_flavor_algorithm
 
-
   match 'users' => 'users#index'
+  match 'users/fetch' => 'users#fetch', :as => :fetch_user_stories
 
   match 'users/:id/feeds' => 'users#feeds', :as => :user_feeds
 

@@ -108,12 +108,12 @@ class FlavorsController < ApplicationController
 
   def calculate_scores
     @flavor = Flavor.find(params[:id])
-    @flavor.score_stories
+    @flavor.delay.score_stories
     @flavor.read_index = 0
     @flavor.save
 
     respond_to do |format|
-      format.html { redirect_to @flavor }
+      format.html { redirect_to flavors_url }
       format.json { head :no_content }
     end
   end

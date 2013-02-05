@@ -10,8 +10,8 @@
 
 <% @flavors.each do |flavor| %>
   <tr>
-    <td><%= flavor.name %></td>
-    <td><%= link_to 'Show', flavor %></td>
+    <td><%= link_to flavor.name, flavor %></td>
+    <td><%= "(#{flavor.stories.count})" %></td>
     <td><%= link_to 'Sort', calculate_flavor_scores_path(flavor) %></td>
     <td><%= link_to 'Edit', edit_flavor_path(flavor) %></td>
     <td><%= link_to 'Destroy', flavor, method: :delete, data: { confirm: 'Are you sure?' } %></td>
