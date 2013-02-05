@@ -50,4 +50,8 @@ class Flavor < ActiveRecord::Base
     #allstories.sort_by(&:score).reverse[rindex]
   end
 
+  def get_unread_count
+    stories.where(:bsb_feed_id => bsb_feeds.pluck(:id)).count
+  end
+
 end
